@@ -1,0 +1,33 @@
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python Bytecode and Cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment Variables & Secrets
+.env
+.env.local
+*.pem
+*.key
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs & Databases
+*.log
+*.sqlite3
+
+# Distribution / Build Output
+build/
+dist/
+*.egg-info/
+
