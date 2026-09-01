@@ -7,6 +7,7 @@ import statsmodels.api as sm
 from sklearn.metrics import mean_squared_error, mean_absolute_error, roc_auc_score
 import openpyxl
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 # Loading data for probit model fitting
 def load_clean_data(shift=-12):
@@ -92,6 +93,26 @@ rmse = np.sqrt(
 )
 corr = df_comparison["our_pred_prob"].corr(df_comparison["nyfed_prob"])
 auc_score = roc_auc_score(df_comparison["target_12m"], df_comparison["our_pred_prob"])
+
+#------- saving the prediction probabilities to CSV for further analysis ---------
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+RESULTS_DIR = PROJECT_ROOT / "data" / "results"
+RESULTS_DIR.mkdir(parents=True, exist_ok=True)  # Create directory if missing
+
+output_file = RESULTS_DIR / "probit_predictions.csv"
+
+# Build export DataFrame
+df_export = pd.DataFrame({
+    'spread_date': df.index,
+    'target_date': df.index + pd.DateOffset(months=12),
+    'T10Y3M': df['T10Y3M'],
+    'recession_prob': df["our_pred_prob"]
+}).dropna(subset=["recession_prob"])
+
+df_export.to_csv(output_file, index=False)
+print(f"Predictions saved to '{output_file}'")
 
 # ------------ Model Summary and Accuracy Data -----------
 print(probit_model.summary())
