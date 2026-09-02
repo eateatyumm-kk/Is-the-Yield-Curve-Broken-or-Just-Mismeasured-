@@ -15,5 +15,5 @@ This is a model follows the research by Estrella & Mishkin they used prohibit re
 -> I first loaded the data and adjusted the data to monthly data. to prevent data leakage the average was recorded as end of month mean. 
 -> predict the percentage of incoming recesion 12 months in future -> calculate the R2 data by comparing with the y value
 -> compare the prediction with FED prediction -> make sure to adjust the time, and there are some slight deviation because FED original data prediction starts from 1950 while FRED data starts from 1980
--> 
+-> saved the prediction data as csv in data/result folder.
 
